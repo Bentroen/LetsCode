@@ -49,6 +49,8 @@ function piscar(botao) {
     setTimeout(() => {
         botao.classList.remove("pressed");
     }, 200);
+
+    playSound(botao.id);
 }
 
 function buttonPressed(e) {
@@ -69,6 +71,11 @@ function buttonPressed(e) {
 
     passo += 1;
 
+}
+
+function playSound(cor) {
+    const audio = new Audio(`sounds/${cor}.mp3`);
+    audio.play();
 }
 
 document.addEventListener("keydown", startGame);
