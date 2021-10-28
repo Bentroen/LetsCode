@@ -1,13 +1,16 @@
 let title = document.getElementById("level-title");
-let botoes = document.querySelectorAll(".btn")
+let background = document.body;
+let botoes = document.querySelectorAll(".btn");
 
 let level, sequencia, passo, cores;
 let iniciado = false;
 
+document.addEventListener("keydown", startGame);
 
 function startGame() {
     if (!iniciado) {
 
+        background.classList.remove("game-over")
         botoes.forEach((btn) => btn.addEventListener("click", buttonPressed));
 
         level = 0;
@@ -15,8 +18,6 @@ function startGame() {
         passo = 0;
     
         cores = ["green", "red", "yellow", "blue"];
-    
-        iniciado = false;
 
         getNumero();
         iniciado = true;
@@ -27,6 +28,11 @@ function fimDoJogo() {
     title.textContent = "Você perdeu! Pressione uma tecla para reiniciar";
     botoes.forEach((btn) => btn.removeEventListener("click", buttonPressed));
     iniciado = false;
+
+    background.classList.add("game-over");
+    setTimeout(() => {background.classList.remove("game-over")}, 1000);
+
+    playSound("sounds/wrong.mp3");
 }
 
 function getNumero() {
@@ -50,14 +56,16 @@ function piscar(botao) {
         botao.classList.remove("pressed");
     }, 200);
 
-    playSound(botao.id);
+    playButtonSound(botao.id);
 }
 
 function buttonPressed(e) {
 
-    piscar(this);
+    let botao = e.target
 
-    let cor = cores.indexOf(this.id);
+    piscar(botao);
+
+    let cor = cores.indexOf(botao.id);
 
     console.log(sequencia[passo], cor);
 
@@ -73,9 +81,11 @@ function buttonPressed(e) {
 
 }
 
-function playSound(cor) {
-    const audio = new Audio(`sounds/${cor}.mp3`);
-    audio.play();
+function playButtonSound(cor) {
+    playSound(`sounds/${cor}.mp3`)
 }
 
-document.addEventListener("keydown", startGame);
+function playSound(path) {
+    const audio = new Audio(path);
+    audio.play();
+}
