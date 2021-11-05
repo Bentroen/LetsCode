@@ -4,6 +4,9 @@ const nenhumaTarefaConcluidaEl = document.querySelector(".no-done-tasks");
 const tarefasPendentesEl = document.getElementById("pending").getElementsByTagName("tbody")[0]
 const tarefasConcluidasEl = document.getElementById("done")
 
+const tarefasPendentesTitle = document.querySelector(".pending-title");
+const tarefasConcluidasTitle = document.querySelector(".done-title");
+
 const tarefaInput = document.getElementById("task-name-input");
 const dataInput = document.getElementById("task-date-input");
 const submitInput = document.getElementById("add-task-button");
@@ -73,7 +76,7 @@ function adicionarTarefa(nome, data, concluida) {
         botoes[0].addEventListener("click", removerTarefaConcluida);
     }
 
-    console.log(tarefasPendentes);
+    atualizarTitulos();
 }
 
 function moverTarefaParaCima(e) {
@@ -116,7 +119,9 @@ function removerTarefa(e) {
     if (tarefasPendentes.length === 0) {
         nenhumaTarefaPendenteEl.classList.remove("hidden");
     }
-    console.log(tarefaRemovida);
+
+    atualizarTitulos();
+
     return tarefaRemovida;
 }
 
@@ -132,6 +137,8 @@ function removerTarefaConcluida(e) {
     if (tarefasConcluidas.length === 0) {
         nenhumaTarefaConcluidaEl.classList.remove("hidden");
     }
+
+    atualizarTitulos();
 
     return tarefaRemovida;
 }
@@ -153,6 +160,11 @@ function criarTarefa() {
         return;
     }
     adicionarTarefa(nome, data);
+}
+
+function atualizarTitulos() {
+    tarefasPendentesTitle.textContent = `Pendentes (${tarefasPendentes.length})`
+    tarefasConcluidasTitle.textContent = `Concluídas (${tarefasConcluidas.length})`
 }
 
 submitInput.addEventListener("click", criarTarefa);
