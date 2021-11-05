@@ -54,12 +54,15 @@ function adicionarTarefa(nome, data, concluida) {
     concluidoEl.innerHTML = ` \
     <button class="btn btn-mark-task-done"><span class="material-icons">${checkboxIcon}</span></button> \
     `
-    concluidoEl.querySelector('button').addEventListener("click", marcarTarefaComoConcluida);
+
+    if (!concluida) {
+        concluidoEl.querySelector('button').addEventListener("click", marcarTarefaComoConcluida);
+    } else {
+        concluidoEl.querySelector('button').addEventListener("click", desmarcarTarefaComoConcluida);
+    }
 
     const botoes = acoesEl.querySelectorAll('button');
     
-
-
     if (!concluida) {
         nenhumaTarefaPendenteEl.classList.add("hidden");
         botoes[0].addEventListener("click", removerTarefa);
@@ -134,8 +137,13 @@ function removerTarefaConcluida(e) {
 }
 
 function marcarTarefaComoConcluida(e) {
-    const {nome, data, concluida} = removerTarefa(e);
+    const {nome, data, } = removerTarefa(e);
     adicionarTarefa(nome, data, true);
+}
+
+function desmarcarTarefaComoConcluida(e) {
+    const {nome, data, } = removerTarefaConcluida(e);
+    adicionarTarefa(nome, data, false);
 }
 
 function criarTarefa() {
