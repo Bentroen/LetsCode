@@ -42,9 +42,13 @@ function adicionarTarefa(nome, data, concluida) {
     let acoesEl = tarefaEl.insertCell();
     acoesEl.innerHTML = ' \
         <button class="btn btn-delete-task"><span class="material-icons">delete</span></button> \
+    '
+    
+    if (!concluida) {
+        acoesEl.innerHTML = acoesEl.innerHTML + ' \
         <button class="btn btn-shift-task-up"><span class="material-icons">arrow_upward</span></button> \
         <button class="btn btn-shift-task-down"><span class="material-icons">arrow_downward</span></button> \
-    '
+    '}
 
     const checkboxIcon = concluida ? "check_box": "check_box_outline_blank"
     concluidoEl.innerHTML = ` \
