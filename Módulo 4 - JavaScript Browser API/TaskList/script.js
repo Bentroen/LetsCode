@@ -17,19 +17,24 @@ function getElementIndex(element) {
 	return [...element.parentNode.children].indexOf(element)
 }
 
-function adicionarTarefa(nome, data) {
-    tarefa = {
+function adicionarTarefa(nome, data, concluida) {
+    let tarefa = {
         "nome": nome,
         "data": data,
-        "concluida": false
+        "concluida": concluida
     };
-    tarefasPendentes.unshift(tarefa);
 
-    let tarefaEl = tarefasPendentesEl.insertRow(0);
+    let listaEl;
+    if (!concluida) {
+        tarefasPendentes.unshift(tarefa);
+        listaEl = tarefasPendentesEl;
+    } else {
+        tarefasConcluidas.unshift(tarefa);
+        listaEl = tarefasConcluidasEl;
+    }
+
+    let tarefaEl = listaEl.insertRow(0);
     let concluidoEl = tarefaEl.insertCell();
-    concluidoEl.innerHTML = ' \
-        <span class="material-icons">check_box_outline_blank</span> \
-    '
     let nomeEl = tarefaEl.insertCell();
     nomeEl.appendChild(document.createTextNode(nome));
     let dataEl = tarefaEl.insertCell();
@@ -41,30 +46,64 @@ function adicionarTarefa(nome, data) {
         <button class="btn btn-shift-task-down"><span class="material-icons">arrow_downward</span></button> \
     '
 
-    const botoes = acoesEl.querySelectorAll('button');
-    botoes[0].addEventListener("click", removerTarefa);
-    //botoes[1].addEventListener("click", moverTarefaParaCima);
-    //botoes[2].addEventListener("click", moverTarefaParaBaixo);
+    const checkboxIcon = concluida ? "check_box": "check_box_outline_blank"
+    concluidoEl.innerHTML = ` \
+    <button class="btn btn-mark-task-done"><span class="material-icons">${checkboxIcon}</span></button> \
+    `
+    concluidoEl.querySelector('button').addEventListener("click", marcarTarefaComoConcluida);
 
-    nenhumaTarefaPendenteEl.classList.add("hidden")
+    const botoes = acoesEl.querySelectorAll('button');
+    
+
+
+    if (!concluida) {
+        nenhumaTarefaPendenteEl.classList.add("hidden");
+        botoes[0].addEventListener("click", removerTarefa);
+        //botoes[1].addEventListener("click", moverTarefaParaCima);
+        //botoes[2].addEventListener("click", moverTarefaParaBaixo);
+    } else {
+        nenhumaTarefaConcluidaEl.classList.add("hidden");
+        botoes[0].addEventListener("click", removerTarefaConcluida);
+    }
 
     console.log(tarefasPendentes);
 }
 
 function removerTarefa(e) {
     const taskEl = e.target.parentNode.parentNode;
-    console.log(taskEl);
-    console.log(taskEl.parentElement);
     const taskIndex = getElementIndex(taskEl);
-    console.log(taskIndex);
+
     tarefasPendentesEl.deleteRow(taskIndex);
 
+    const tarefaRemovida = tarefasPendentes[taskIndex];
     tarefasPendentes.splice(taskIndex, 1);
-    console.log(tarefasPendentes);
 
     if (tarefasPendentes.length === 0) {
         nenhumaTarefaPendenteEl.classList.remove("hidden");
     }
+    console.log(tarefaRemovida);
+    return tarefaRemovida;
+}
+
+function removerTarefaConcluida(e) {
+    const taskEl = e.target.parentNode.parentNode;
+    const taskIndex = getElementIndex(taskEl);
+
+    tarefasConcluidasEl.deleteRow(taskIndex);
+
+    const tarefaRemovida = tarefasConcluidas[taskIndex];
+    tarefasConcluidas.splice(taskIndex, 1);
+
+    if (tarefasConcluidas.length === 0) {
+        nenhumaTarefaConcluidaEl.classList.remove("hidden");
+    }
+
+    return tarefaRemovida;
+}
+
+function marcarTarefaComoConcluida(e) {
+    const {nome, data, concluida} = removerTarefa(e);
+    adicionarTarefa(nome, data, true);
 }
 
 function criarTarefa() {
