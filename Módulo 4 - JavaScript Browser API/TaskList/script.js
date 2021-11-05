@@ -149,7 +149,9 @@ function desmarcarTarefaComoConcluida(e) {
 function criarTarefa() {
     const nome = tarefaInput.value;
     const data = dataInput.value;
-    console.log(nome, data)
+    if (nome === "" || data === "") {
+        return;
+    }
     adicionarTarefa(nome, data);
 }
 
