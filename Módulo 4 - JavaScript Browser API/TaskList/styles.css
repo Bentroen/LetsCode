@@ -1,0 +1,67 @@
+html {
+  background-color: lightslategray;
+  padding: 20px;
+}
+
+body {
+  margin: auto 15%;
+  padding: 15px 30px;
+  background-color: lightsteelblue;
+  opacity: 70%;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 20px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  display: inline;
+}
+
+.icon {
+  font-size: 4rem;
+  display: inline;
+  float: right;
+  margin: 0;
+}
+
+h2 {
+  font-weight: 400;
+  margin: 10px;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+p {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+hr {
+  border-color: black;
+  opacity: 20%;
+  margin: 20px 0;
+}
+
+.task-list {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  padding: 20px 10px;
+  border-radius: 20px;
+}
+
+table {
+  width: 90%;
+  background-color: white;
+  padding: 0 20px;
+  margin: 5px;
+  border-radius: 20px;
+}
+
+td {
+  vertical-align: top;
+  width: 60%;
+}
