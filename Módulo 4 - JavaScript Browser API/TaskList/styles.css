@@ -63,5 +63,9 @@ table {
 
 td {
   vertical-align: top;
-  width: 60%;
+  width: auto;
+}
+
+.hidden {
+  display: none;
 }
