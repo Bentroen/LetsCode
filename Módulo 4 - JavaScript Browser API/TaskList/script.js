@@ -34,8 +34,6 @@ function adicionarTarefa(nome, data, concluida) {
         tarefasConcluidas.unshift(tarefa);
     }
 
-    console.log(tarefasPendentes);
-
     adicionarElementoTarefa(nome, data, concluida);
     salvarTarefas();
 }
@@ -49,11 +47,8 @@ function adicionarElementoTarefa(nome, data, concluida, inserirNoTopo) {
     }
 
     // 0 para inserir no começo da lista, -1 para inserir no final da lista
-    console.log(inserirNoTopo)
     inserirNoTopo = (typeof inserirNoTopo !== 'undefined') ? inserirNoTopo : true;
-    console.log(inserirNoTopo)
     const index = inserirNoTopo ? 0 : -1;
-    console.log(index)
 
     let tarefaEl = listaEl.insertRow(index);
     let concluidoEl = tarefaEl.insertCell();
@@ -112,8 +107,6 @@ function trocarTarefa(elemento, direcao) {
     var lista = elemento.parentNode;
 
     const taskIndex = getElementIndex(elemento);
-    console.log("a");
-    console.log(taskIndex);
 
     if (direcao === -1 && elemento.previousElementSibling) {
         lista.insertBefore(elemento, elemento.previousElementSibling);
