@@ -13,6 +13,10 @@ let tarefasPendentes = [];
 let tarefasConcluidas = [];
 
 
+function getElementIndex(element) {
+	return [...element.parentNode.children].indexOf(element)
+}
+
 function adicionarTarefa(nome, data) {
     tarefa = {
         "nome": nome,
@@ -37,7 +41,30 @@ function adicionarTarefa(nome, data) {
         <button class="btn btn-shift-task-down"><span class="material-icons">arrow_downward</span></button> \
     '
 
+    const botoes = acoesEl.querySelectorAll('button');
+    botoes[0].addEventListener("click", removerTarefa);
+    //botoes[1].addEventListener("click", moverTarefaParaCima);
+    //botoes[2].addEventListener("click", moverTarefaParaBaixo);
+
     nenhumaTarefaPendenteEl.classList.add("hidden")
+
+    console.log(tarefasPendentes);
+}
+
+function removerTarefa(e) {
+    const taskEl = e.target.parentNode.parentNode;
+    console.log(taskEl);
+    console.log(taskEl.parentElement);
+    const taskIndex = getElementIndex(taskEl);
+    console.log(taskIndex);
+    tarefasPendentesEl.deleteRow(taskIndex);
+
+    tarefasPendentes.splice(taskIndex, 1);
+    console.log(tarefasPendentes);
+
+    if (tarefasPendentes.length === 0) {
+        nenhumaTarefaPendenteEl.classList.remove("hidden");
+    }
 }
 
 function criarTarefa() {
