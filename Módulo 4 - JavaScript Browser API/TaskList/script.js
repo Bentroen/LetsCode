@@ -1,8 +1,8 @@
 const nenhumaTarefaPendenteEl = document.querySelector(".no-pending-tasks");
 const nenhumaTarefaConcluidaEl = document.querySelector(".no-done-tasks");
 
-const tarefasPendentesEl = document.getElementById("pending").getElementsByTagName("tbody")[0]
-const tarefasConcluidasEl = document.getElementById("done")
+const tarefasPendentesEl = document.getElementById("pending").getElementsByTagName("tbody")[0];
+const tarefasConcluidasEl = document.getElementById("done").getElementsByTagName("tbody")[0];
 
 const tarefasPendentesTitle = document.querySelector(".pending-title");
 const tarefasConcluidasTitle = document.querySelector(".done-title");
