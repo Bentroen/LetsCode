@@ -115,15 +115,19 @@ function trocarTarefa(elemento, direcao) {
     console.log("a");
     console.log(taskIndex);
 
-    const temp = tarefasPendentes[taskIndex];
-    tarefasPendentes[taskIndex] = tarefasPendentes[taskIndex + direcao];
-    tarefasPendentes[taskIndex + direcao] = temp;
-
     if (direcao === -1 && elemento.previousElementSibling) {
         lista.insertBefore(elemento, elemento.previousElementSibling);
     } else if (direcao === 1 && elemento.nextElementSibling) {
         lista.insertBefore(elemento, elemento.nextElementSibling.nextElementSibling)
+    } else {
+        return;
     }
+
+    const temp = tarefasPendentes[taskIndex];
+    tarefasPendentes[taskIndex] = tarefasPendentes[taskIndex + direcao];
+    tarefasPendentes[taskIndex + direcao] = temp;
+
+    salvarTarefas();
 }
 
 function removerTarefa(e) {
