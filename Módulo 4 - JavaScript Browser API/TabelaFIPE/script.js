@@ -1,6 +1,7 @@
 const info = document.querySelector("#info");
 
 
+// Requisição para API de consulta à Tabela Fipe: https://deividfortuna.github.io/fipe/
 // Modelo escolhido: Ford Focus 2.0 (2011)
 
 const cod_marca = 22; // Ford
