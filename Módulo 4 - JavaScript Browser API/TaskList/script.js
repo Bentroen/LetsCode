@@ -59,14 +59,42 @@ function adicionarTarefa(nome, data, concluida) {
     if (!concluida) {
         nenhumaTarefaPendenteEl.classList.add("hidden");
         botoes[0].addEventListener("click", removerTarefa);
-        //botoes[1].addEventListener("click", moverTarefaParaCima);
-        //botoes[2].addEventListener("click", moverTarefaParaBaixo);
+        botoes[1].addEventListener("click", moverTarefaParaCima);
+        botoes[2].addEventListener("click", moverTarefaParaBaixo);
     } else {
         nenhumaTarefaConcluidaEl.classList.add("hidden");
         botoes[0].addEventListener("click", removerTarefaConcluida);
     }
 
     console.log(tarefasPendentes);
+}
+
+function moverTarefaParaCima(e) {
+    const taskEl = e.target.parentNode.parentNode;
+    trocarTarefa(taskEl, -1);
+}
+
+function moverTarefaParaBaixo(e) {
+    const taskEl = e.target.parentNode.parentNode;
+    trocarTarefa(taskEl, 1);
+}
+
+function trocarTarefa(elemento, direcao) {
+    var lista = elemento.parentNode;
+
+    const taskIndex = getElementIndex(elemento);
+    console.log("a");
+    console.log(taskIndex);
+
+    const temp = tarefasPendentes[taskIndex];
+    tarefasPendentes[taskIndex] = tarefasPendentes[taskIndex + direcao];
+    tarefasPendentes[taskIndex + direcao] = temp;
+
+    if (direcao === -1 && elemento.previousElementSibling) {
+        lista.insertBefore(elemento, elemento.previousElementSibling);
+    } else if (direcao === 1 && elemento.nextElementSibling) {
+        lista.insertBefore(elemento, elemento.nextElementSibling.nextElementSibling)
+    }
 }
 
 function removerTarefa(e) {
