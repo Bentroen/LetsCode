@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MyFirstApp';
+  title:string = 'Bentroen';
+
+  username: string = '';
+
+  checkUsername() {
+    return this.username === '';
+  }
+
+  resetUsername() {
+    this.username = '';
+  }
 }
