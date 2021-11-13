@@ -61,3 +61,17 @@
 <hr>
 
 <ol>
+  <li>Crie três novos componentes: GameControl, Odd e Even</li>
+  <li>O componente GameControl deve ter botões para começar e parar o jogo</li>
+  <li>Quando começar o jogo, um evento (guardando um número incrementado) deve ser emitido a cada segundo (ref = setInterval())</li>
+  <li>O evento deve ser escutado de fora do componente</li>
+  <li>Quando parar o jogo, nenhum evento deve ser mais emitido (clearInterval(ref))</li>
+  <li>Um novo componente Odd deve ser criado para cada número ímpar emitido, o mesmo deve acontecer para o Even Component (nos números pares)</li>
+  <li>Produza Ímpar - NÚMERO ou Par - NÚMERO nos dois componentes</li>
+</ol>
+
+<app-game-control (intervalFired)="onIntervalFired($event)"></app-game-control>
+
+<app-odd *ngFor="let oddNumber of oddNumbers" [number]="oddNumber"></app-odd>
+<app-even *ngFor="let evenNumber of evenNumbers" [number]="evenNumber"></app-even>
+
