@@ -1,0 +1,23 @@
+{
+  "playlists": [
+    {
+      "id": 1,
+      "name": "Pop",
+      "imagePath": ""
+    },
+    {
+      "id": 2,
+      "name": "Child",
+      "imagePath": ""
+    },
+    {
+      "id": 3,
+      "name": "Latino",
+      "imagePath": ""
+    },
+    {
+      "name": "RocknRoll",
+      "id": 4
+    }
+  ]
+}
