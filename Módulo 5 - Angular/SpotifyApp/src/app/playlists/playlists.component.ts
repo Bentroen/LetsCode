@@ -5,7 +5,7 @@ import { SpotifyService } from '../services/spotify.service';
 @Component({
   selector: 'app-playlists',
   templateUrl: './playlists.component.html',
-  styleUrls: ['./playlists.component.css']
+  styleUrls: ['./playlists.component.css'],
 })
 export class PlaylistsComponent implements OnInit {
   playlists!: Playlist[];
@@ -15,5 +15,4 @@ export class PlaylistsComponent implements OnInit {
   ngOnInit(): void {
     this.playlists = this.spotifyService.getPlaylists();
   }
-
 }

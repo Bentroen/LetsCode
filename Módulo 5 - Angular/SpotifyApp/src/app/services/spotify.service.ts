@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Playlist } from '../models/playlist.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SpotifyService {
   private playlists: Playlist[] = [
@@ -13,7 +13,7 @@ export class SpotifyService {
     new Playlist(5, 'Focus', ''),
   ];
 
-  constructor() { }
+  constructor() {}
 
   getPlaylists() {
     return this.playlists;

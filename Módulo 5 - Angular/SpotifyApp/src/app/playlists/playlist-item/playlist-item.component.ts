@@ -4,14 +4,12 @@ import { Playlist } from 'src/app/models/playlist.model';
 @Component({
   selector: 'app-playlist-item',
   templateUrl: './playlist-item.component.html',
-  styleUrls: ['./playlist-item.component.css']
+  styleUrls: ['./playlist-item.component.css'],
 })
 export class PlaylistItemComponent implements OnInit {
   @Input() playlist!: Playlist;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

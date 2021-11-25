@@ -14,13 +14,10 @@ import { SpotifyService } from './services/spotify.service';
     HeaderComponent,
     PlaylistsComponent,
     PlaylistItemComponent,
-    PlaylistItemEditComponent
+    PlaylistItemEditComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [SpotifyService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
