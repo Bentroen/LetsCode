@@ -1,1 +1,7 @@
-<p>playlists works!</p>
+<h1> Playlists </h1>
+
+<div>
+  <button class="button" style="color: black;">Criar Nova Playlist</button>
+</div>
+
+<app-playlist-item *ngFor="let playlist of playlists" [playlist]="playlist"></app-playlist-item>
