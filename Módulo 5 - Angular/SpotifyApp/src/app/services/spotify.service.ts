@@ -18,4 +18,8 @@ export class SpotifyService {
   getPlaylists() {
     return this.playlists;
   }
+
+  getPlaylist(id: number) {
+    return this.playlists.find((p) => p.id === id);
+  }
 }

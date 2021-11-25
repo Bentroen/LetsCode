@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Playlist } from 'src/app/models/playlist.model';
 
 @Component({
@@ -9,7 +10,14 @@ import { Playlist } from 'src/app/models/playlist.model';
 export class PlaylistItemComponent implements OnInit {
   @Input() playlist!: Playlist;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Playlist ');
+    console.log(this.playlist);
+  }
+
+  onNavigate() {
+    this.router.navigate([this.playlist.id, { relativeTo: this.route }]);
+  }
 }
