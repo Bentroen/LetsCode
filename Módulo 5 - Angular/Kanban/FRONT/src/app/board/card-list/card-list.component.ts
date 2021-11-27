@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Card } from 'src/app/models/card.model';
 
 @Component({
@@ -7,6 +7,8 @@ import { Card } from 'src/app/models/card.model';
   styleUrls: ['./card-list.component.css']
 })
 export class CardListComponent implements OnInit {
+
+  @Input() title!: string;
 
   cards: Array<Card> = [];
 
