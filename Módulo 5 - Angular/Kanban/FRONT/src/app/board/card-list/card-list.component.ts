@@ -17,6 +17,8 @@ export class CardListComponent implements OnInit {
   ngOnInit(): void {
     let card = new Card("Test", "This is a test description!");
     this.cards.push(card);
+    let card2 = new Card("Test2", "This is another test description!");
+    this.cards.push(card2);
     console.log(this.cards);
   }
 
