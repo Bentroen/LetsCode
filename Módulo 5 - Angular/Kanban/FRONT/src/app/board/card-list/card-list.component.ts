@@ -22,4 +22,7 @@ export class CardListComponent implements OnInit {
     console.log(this.cards);
   }
 
+  deleteCard(index: number): void {
+    this.cards.splice(index, 1);
+  }
 }

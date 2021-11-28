@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,8 @@ export class CardComponent implements OnInit {
 
   @Input() name!: string;
   @Input() description!: string;
+
+  @Output() onDelete = new EventEmitter<any>();
 
   isEditOpen!: boolean;
 
@@ -36,6 +38,10 @@ export class CardComponent implements OnInit {
     this.isEditOpen = false;
     this.name = this.cardForm.value.name;
     this.description = this.cardForm.value.description;
+  }
+
+  deleteCard(): void {
+    this.onDelete.emit();
   }
 
 }
