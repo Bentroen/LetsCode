@@ -1,9 +1,15 @@
 <div>
-    <h3>{{ name }}</h3>
-    <p>{{ description }}</p>
+    <div *ngIf="this.isEditOpen">
+        
+    </div>
 
-    <button type="button" class="btn btn-sm btn-outline-secondary">Move left</button>
-    <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
-    <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-    <button type="button" class="btn btn-sm btn-outline-secondary">Move right</button>
+    <div *ngIf="!this.isEditOpen">
+        <h3>{{ name }}</h3>
+        <p>{{ description }}</p>
+
+        <button type="button" class="btn btn-sm btn-outline-secondary">Move left</button>
+        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Move right</button>
+    </div>
 </div>
