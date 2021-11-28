@@ -2,3 +2,7 @@ div {
     border: 1px solid;
     margin: 10px 0;
 }
+
+input, textarea {
+    display: block;
+}

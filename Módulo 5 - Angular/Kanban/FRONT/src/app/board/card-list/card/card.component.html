@@ -1,6 +1,12 @@
 <div>
     <div *ngIf="this.isEditOpen">
-        
+        <form [formGroup]="cardForm" (ngSubmit)=saveCard()>
+            <input type="text" formControlName="name">
+            <textarea formControlName="description"></textarea>
+            <br>
+            <button type="submit" class="btn btn-sm btn-outline-success" [disabled]="description.length === 0">Save</button>
+        </form>
+
     </div>
 
     <div *ngIf="!this.isEditOpen">
@@ -8,7 +14,7 @@
         <p>{{ description }}</p>
 
         <button type="button" class="btn btn-sm btn-outline-secondary">Move left</button>
-        <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" (click)="editCard()">Edit</button>
         <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
         <button type="button" class="btn btn-sm btn-outline-secondary">Move right</button>
     </div>

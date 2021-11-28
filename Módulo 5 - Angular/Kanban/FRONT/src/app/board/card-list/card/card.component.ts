@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-card',
@@ -12,9 +13,29 @@ export class CardComponent implements OnInit {
 
   isEditOpen!: boolean;
 
-  constructor() { }
+  cardForm = new FormGroup({
+    name: new FormControl(''),
+    description: new FormControl(''),
+  });
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  editCard(): void {
+    this.isEditOpen = true;
+    this.cardForm.setValue({
+      "name": this.name,
+      "description": this.description,
+    });
+  }
+
+  saveCard(): void {
+    this.isEditOpen = false;
+    this.name = this.cardForm.value.name;
+    this.description = this.cardForm.value.description;
   }
 
 }
