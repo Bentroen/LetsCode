@@ -3,7 +3,6 @@
         <form [formGroup]="cardForm" (ngSubmit)=saveCard()>
             <input type="text" formControlName="name">
             <textarea formControlName="description"></textarea>
-            <br>
             <button type="submit" class="btn btn-sm btn-outline-success" [disabled]="description.length === 0">Save</button>
         </form>
 
