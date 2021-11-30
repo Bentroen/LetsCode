@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Card } from 'src/app/models/card.model';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-card-list',
@@ -12,8 +14,10 @@ export class CardListComponent implements OnInit {
   @Input() title!: string;
 
   cards: Card[] = [];
+  subscription!: Subscription;
 
-  constructor() { }
+  constructor(private boardService: BoardService) {
+  }
 
   ngOnInit(): void {
     let card = new Card("Test", "This is a test description!");
@@ -21,9 +25,21 @@ export class CardListComponent implements OnInit {
     let card2 = new Card("Test2", "This is another test description!");
     this.cards.push(card2);
     console.log(this.cards);
+
+    this.subscription = this.boardService.onChanged().subscribe(
+      ({card, targetListId}) => {
+        if (targetListId == this.id) {
+          this.addCard(card);
+        }
+      })
+  }
+
+  addCard(card: Card): void {
+    this.cards.push(card);
   }
 
   deleteCard(index: number): void {
     this.cards.splice(index, 1);
   }
+
 }

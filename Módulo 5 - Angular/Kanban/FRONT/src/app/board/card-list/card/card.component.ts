@@ -23,7 +23,7 @@ export class CardComponent implements OnInit {
     description: new FormControl(''),
   });
 
-  constructor() {
+  constructor(private boardService: BoardService) {
   }
 
   ngOnInit(): void {
@@ -45,6 +45,19 @@ export class CardComponent implements OnInit {
 
   deleteCard(): void {
     this.onDelete.emit();
+  }
+
+  moveCard(targetList: number): void {
+    this.boardService.moveCard(this.card, targetList);
+    this.deleteCard();
+  }
+
+  moveCardLeft(): void {
+    this.moveCard(this.listId - 1);
+  }
+
+  moveCardRight(): void {
+    this.moveCard(this.listId + 1);
   }
 
 }
