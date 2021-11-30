@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
 
   constructor() { }
+  lists: string[] = ["To-do", "In progress", "Done"];
 
   ngOnInit(): void {
   }
