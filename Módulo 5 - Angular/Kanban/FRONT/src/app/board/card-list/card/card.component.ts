@@ -8,6 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CardComponent implements OnInit {
 
+  @Input() id!: number;
+  @Input() listId!: number;
   @Input() name!: string;
   @Input() description!: string;
 

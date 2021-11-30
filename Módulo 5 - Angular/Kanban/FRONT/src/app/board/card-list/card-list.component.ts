@@ -8,6 +8,7 @@ import { Card } from 'src/app/models/card.model';
 })
 export class CardListComponent implements OnInit {
 
+  @Input() id!: number;
   @Input() title!: string;
 
   cards: Array<Card> = [];
