@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { BoardService } from 'src/app/services/board.service';
 
 @Component({
   selector: 'app-card',
@@ -10,8 +11,7 @@ export class CardComponent implements OnInit {
 
   @Input() id!: number;
   @Input() listId!: number;
-  @Input() name!: string;
-  @Input() description!: string;
+  @Input() card!: Card;
 
   @Output() onDelete = new EventEmitter<any>();
 
@@ -31,15 +31,15 @@ export class CardComponent implements OnInit {
   editCard(): void {
     this.isEditOpen = true;
     this.cardForm.setValue({
-      "name": this.name,
-      "description": this.description,
+      "name": this.card.name,
+      "description": this.card.description,
     });
   }
 
   saveCard(): void {
     this.isEditOpen = false;
-    this.name = this.cardForm.value.name;
-    this.description = this.cardForm.value.description;
+    this.card.name = this.cardForm.value.name;
+    this.card.description = this.cardForm.value.description;
   }
 
   deleteCard(): void {
