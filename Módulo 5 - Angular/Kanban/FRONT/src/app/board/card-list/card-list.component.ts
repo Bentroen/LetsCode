@@ -11,7 +11,7 @@ export class CardListComponent implements OnInit {
   @Input() id!: number;
   @Input() title!: string;
 
-  cards: Array<Card> = [];
+  cards: Card[] = [];
 
   constructor() { }
 
