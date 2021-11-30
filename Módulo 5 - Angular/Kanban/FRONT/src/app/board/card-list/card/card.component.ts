@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Card } from 'src/app/models/card.model';
 import { BoardService } from 'src/app/services/board.service';
 
 @Component({
