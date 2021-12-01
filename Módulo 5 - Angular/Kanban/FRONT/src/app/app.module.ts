@@ -9,6 +9,7 @@ import { NewCardComponent } from './board/new-card/new-card.component';
 import { CardListComponent } from './board/card-list/card-list.component';
 import { CardComponent } from './board/card-list/card/card.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
     NewCardComponent,
     CardListComponent,
     CardComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
