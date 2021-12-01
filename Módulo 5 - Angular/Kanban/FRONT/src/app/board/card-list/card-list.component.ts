@@ -34,6 +34,10 @@ export class CardListComponent implements OnInit {
       })
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   addCard(card: Card): void {
     this.cards.push(card);
   }
