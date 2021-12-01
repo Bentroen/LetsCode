@@ -37,6 +37,10 @@ export class CardComponent implements OnInit {
     });
   }
 
+  cancelEdit(): void {
+    this.isEditOpen = false;
+  }
+
   saveCard(): void {
     this.isEditOpen = false;
     this.card.name = this.cardForm.value.name;
