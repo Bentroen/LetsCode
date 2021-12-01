@@ -5,5 +5,5 @@
 <p *ngIf="this.cards.length === 0">You don't have any card on this list yet!</p>
 
 <div>
-    <app-card *ngFor="let card of this.cards; let i = index" [id]="i" [listId]="this.id" [card]="card" (onDelete)="deleteCard(i)"></app-card>
+    <app-card *ngFor="let card of this.cards; let i = index" [id]="i" [listId]="this.id" [card]="card"></app-card>
 </div>

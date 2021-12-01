@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Card } from 'src/app/models/card.model';
-import { BoardService } from 'src/app/services/board.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-new-card',
@@ -10,23 +10,21 @@ import { BoardService } from 'src/app/services/board.service';
 })
 export class NewCardComponent implements OnInit {
 
-  cardForm = new FormGroup({
+  form = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
   });
 
-  constructor(private boardService: BoardService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
   }
 
-  addCard() {
-    let card: Card = {
-      "name": this.cardForm.value.name,
-      "description": this.cardForm.value.description
-    }
-    this.boardService.moveCard(card, 0);
-    this.cardForm.reset();
+  addCard(): void {
+    this.apiService.createCardOnServer(this.form.value.name, this.form.value.description, 0).subscribe((data) => {
+      this.apiService.cardChanged.next(data);
+    })
+    this.form.reset();
   }
 
 }

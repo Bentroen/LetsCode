@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Card } from 'src/app/models/card.model';
-import { BoardService } from 'src/app/services/board.service';
+import { ApiService } from 'src/app/services/api.service';
+import { NewCardComponent } from '../../new-card/new-card.component';
 
 @Component({
   selector: 'app-card',
@@ -14,8 +15,6 @@ export class CardComponent implements OnInit {
   @Input() listId!: number;
   @Input() card!: Card;
 
-  @Output() onDelete = new EventEmitter<any>();
-
   isEditOpen!: boolean;
 
   cardForm = new FormGroup({
@@ -23,7 +22,7 @@ export class CardComponent implements OnInit {
     description: new FormControl(''),
   });
 
-  constructor(private boardService: BoardService) {
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
@@ -43,17 +42,29 @@ export class CardComponent implements OnInit {
 
   saveCard(): void {
     this.isEditOpen = false;
-    this.card.name = this.cardForm.value.name;
-    this.card.description = this.cardForm.value.description;
+
+    let newCard = this.card;
+    newCard.name = this.cardForm.value.name;
+    newCard.description = this.cardForm.value.description;
+
+    this.apiService.updateCardOnServer(this.card.uuid, newCard).subscribe((p) => {
+      this.apiService.cardChanged.next(p);
+    })
   }
 
   deleteCard(): void {
-    this.onDelete.emit();
+    this.apiService.deleteCardFromServer(this.card.uuid).subscribe((p) => {
+      this.apiService.cardChanged.next(p);
+    })
   }
 
   moveCard(targetList: number): void {
-    this.boardService.moveCard(this.card, targetList);
-    this.deleteCard();
+    let newCard = this.card;
+    newCard.list = targetList;
+
+    this.apiService.updateCardOnServer(this.card.uuid, newCard).subscribe((p) => {
+      this.apiService.cardChanged.next(p);
+    })
   }
 
   moveCardLeft(): void {
