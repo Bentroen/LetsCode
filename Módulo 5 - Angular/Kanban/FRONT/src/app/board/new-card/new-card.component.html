@@ -1,1 +1,9 @@
-<p>new-card works!</p>
+<h4>New card</h4>
+<hr>
+<div>
+    <form [formGroup]="cardForm" (ngSubmit)=addCard()>
+        <input type="text" formControlName="name">
+        <textarea formControlName="description"></textarea>
+        <button type="submit" class="btn btn-sm btn-outline-success" [disabled]="this.cardForm.value.name.length === 0 || this.cardForm.value.description.length === 0">Save</button>
+    </form>
+</div>
