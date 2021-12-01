@@ -23,8 +23,8 @@ export class NewCardComponent implements OnInit {
   addCard(): void {
     this.apiService.createCardOnServer(this.form.value.name, this.form.value.description, 0).subscribe((data) => {
       this.apiService.cardChanged.next(data);
+      this.form.reset();
     })
-    this.form.reset();
   }
 
 }

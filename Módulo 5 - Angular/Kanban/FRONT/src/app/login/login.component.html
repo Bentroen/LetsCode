@@ -1,1 +1,13 @@
-<p>login works!</p>
+<h2>Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label for="username">Username</label>
+    <input type="text" formControlName="username">
+    <div *ngIf="submitted && loginForm.value.username.errors.required">O nome de usuário é obrigatório</div>
+    <label for="password">Password</label>
+    <input type="password" formControlName="password">
+    <div *ngIf="submitted && loginForm.value.password.errors.required">A senha é obrigatória</div>
+    <button type="submit" [disabled]="loading" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Login
+    </button>
+</form>

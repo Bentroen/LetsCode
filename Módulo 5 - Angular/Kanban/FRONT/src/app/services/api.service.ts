@@ -1,23 +1,28 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Card } from '../models/card.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private baseUrl: string = "http://localhost:3000/cards"; //"http://0.0.0.0:5000/";
+  private baseUrl: string = "http://localhost:5000/cards";
 
   lists: string[] = ["ToDo", "Doing", "Done"]
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   cardChanged = new Subject();
 
-  login(username: string, password: string) {
-    return this.http.get(`${this.baseUrl}/login`);
+  getHttpHeaders() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.authService.currentUserToken
+    });
+    return {'headers': headers}
   }
 
   toApiCard(card: Card) {
@@ -35,20 +40,20 @@ export class ApiService {
       conteudo: description,
       lista: this.lists[listId]
     }
-    return this.http.post<Card[]>(this.baseUrl, body);
+    return this.http.post<Card[]>(this.baseUrl, body, this.getHttpHeaders());
   }
 
   getCardsFromServer() {
-    return this.http.get<Array<any>>(this.baseUrl);
+    return this.http.get<Array<any>>(this.baseUrl, this.getHttpHeaders());
   }
 
   updateCardOnServer(id: string, card: Card) {
     let body = this.toApiCard(card);
-    return this.http.put<Card>(`${this.baseUrl}/${id}`, body);
+    return this.http.put<Card>(`${this.baseUrl}/${id}`, body, this.getHttpHeaders());
   }
 
   deleteCardFromServer(id: string) {
-    return this.http.delete<Card[]>(`${this.baseUrl}/${id}`);
+    return this.http.delete<Card[]>(`${this.baseUrl}/${id}`, this.getHttpHeaders());
   }
 
 }
