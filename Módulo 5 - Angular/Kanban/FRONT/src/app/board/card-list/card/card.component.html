@@ -1,21 +1,19 @@
-<div>
-    <div *ngIf="this.isEditOpen">
-        <form [formGroup]="cardForm" (ngSubmit)=saveCard()>
-            <input type="text" formControlName="name">
-            <textarea formControlName="description"></textarea>
-            <button type="button" class="btn btn-sm btn-outline-danger" (click)="cancelEdit()">Cancel</button>
-            <button type="submit" class="btn btn-sm btn-outline-success" [disabled]="this.cardForm.value.name.length === 0 || this.cardForm.value.description.length === 0">Save</button>
-        </form>
+<div *ngIf="this.isEditOpen">
+    <form [formGroup]="cardForm" (ngSubmit)=saveCard()>
+        <input type="text" formControlName="name">
+        <textarea formControlName="description"></textarea>
+        <button type="button" class="btn btn-sm btn-outline-danger" (click)="cancelEdit()">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-outline-success" [disabled]="this.cardForm.value.name.length === 0 || this.cardForm.value.description.length === 0">Save</button>
+    </form>
 
-    </div>
+</div>
 
-    <div *ngIf="!this.isEditOpen">
-        <h3>{{ this.card.name }}</h3>
-        <p>{{ this.card.description }}</p>
+<div *ngIf="!this.isEditOpen">
+    <h3>{{ this.card.name }}</h3>
+    <p>{{ this.card.description }}</p>
 
-        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="moveCardLeft()" *ngIf="this.listId > 0">Move left</button>
-        <button type="button" class="btn btn-sm btn-outline-primary" (click)="editCard()">Edit</button>
-        <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteCard()">Delete</button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="moveCardRight()" *ngIf="this.listId < 2">Move right</button>
-    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="moveCardLeft()" *ngIf="this.listId > 0">Move left</button>
+    <button type="button" class="btn btn-sm btn-outline-primary" (click)="editCard()">Edit</button>
+    <button type="button" class="btn btn-sm btn-outline-danger" (click)="deleteCard()">Delete</button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="moveCardRight()" *ngIf="this.listId < 2">Move right</button>
 </div>
