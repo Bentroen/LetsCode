@@ -11,6 +11,7 @@ import { CardListComponent } from './board/card-list/card-list.component';
 import { CardComponent } from './board/card-list/card/card.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoginComponent } from './login/login.component';
     CardListComponent,
     CardComponent,
     LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
