@@ -12,9 +12,9 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
-  loading = false;
-  submitted = false;
-  error = undefined;
+  loading: boolean = false;
+  submitted: boolean = false;
+  error: string = '';
   returnUrl!: string;
 
   constructor( 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    this.error = undefined;
+    this.error = '';
 
     if (this.loginForm.invalid) {
       return;
@@ -49,16 +49,14 @@ export class LoginComponent implements OnInit {
 
     const form = this.loginForm.value;
     this.authService.login(form.username, form.password)
-      .subscribe(
-        () => {
+      .subscribe({
+        complete: () => {
           this.router.navigateByUrl('/kanban-board');
         },
-        /*error: error => {
-          console.log("ERROR");
-          this.error = error;
+        error: (e) => {
+          this.error = "The username or password are incorrect"
           this.loading = false;
         }
-      }*/
-      );
+      });
   }
 }
