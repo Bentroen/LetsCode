@@ -43,7 +43,7 @@ export class CardComponent implements OnInit {
   saveCard(): void {
     this.isEditOpen = false;
 
-    let newCard = this.card;
+    let newCard = <Card>{ ...this.card }
     newCard.name = this.cardForm.value.name;
     newCard.description = this.cardForm.value.description;
 
@@ -59,7 +59,7 @@ export class CardComponent implements OnInit {
   }
 
   moveCard(targetList: number): void {
-    let newCard = this.card;
+    let newCard = <Card>{ ...this.card };
     newCard.list = targetList;
 
     this.apiService.updateCardOnServer(this.card.uuid, newCard).subscribe((p) => {
