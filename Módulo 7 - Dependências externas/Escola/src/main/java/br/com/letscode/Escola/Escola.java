@@ -9,8 +9,12 @@ public class Escola {
 
     public static void main(String[] args) {
         popularTurmas();
+
         String relatorioAlunos = listarAlunosMatriculados();
         System.out.printf(relatorioAlunos);
+
+        String relatorioTurmas = listarTurmas();
+        System.out.printf(relatorioTurmas);
     }
 
     public static void criarTurmas() {
@@ -98,6 +102,10 @@ public class Escola {
             // Adicionar aluno à lista geral
             alunosMatriculados.add(aluno);
         }
+
+        // Adicionar turmas à escola
+        turmas.add(turmaJava);
+        turmas.add(turmaBD);
     }
 
     public static String listarAlunosMatriculados() {
@@ -107,6 +115,7 @@ public class Escola {
         relatorio.append(String.format("Há %d alunos matriculados:\n\n", numAlunos));
 
         ArrayList<Aluno> alunosEmOrdemAlfabetica = (ArrayList<Aluno>) alunosMatriculados.clone();
+        // TODO: Mover método de comparação para a classe Aluno
         alunosEmOrdemAlfabetica.sort(Comparator.comparing(Aluno::getNomeCompleto));
 
         int i = 0;
@@ -123,7 +132,23 @@ public class Escola {
     }
 
     public static String listarTurmas() {
-        return "";
+        StringBuilder relatorio = new StringBuilder();
+
+        int numTurmas = turmas.size();
+        relatorio.append(String.format("Há %d turmas criadas:\n\n", numTurmas));
+
+        int i = 0;
+        for (Turma turma : turmas) {
+            i++;
+            relatorio.append(String.format("%d. %s (%d alunos)\n", i, turma.getNomeTurma(), turma.getNumAlunos()));
+
+            for (Aluno aluno : turma.getAlunosEmOrdemAlfabetica()) {
+                relatorio.append("\t└ " + aluno.getNomeCompleto() + "\n");
+            }
+        }
+
+        String relatorioString = relatorio.toString();
+        return relatorioString;
     }
 
 }

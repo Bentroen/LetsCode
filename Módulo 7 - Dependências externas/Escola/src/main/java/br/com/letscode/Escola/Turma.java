@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @Builder
 public class Turma {
@@ -32,7 +33,13 @@ public class Turma {
         return true;
     }
 
-    public int numAlunos() {
+    public ArrayList<Aluno> getAlunosEmOrdemAlfabetica() {
+        ArrayList<Aluno> alunosEmOrdemAlfabetica = (ArrayList<Aluno>) this.alunos.clone();
+        alunosEmOrdemAlfabetica.sort(Comparator.comparing(Aluno::getNomeCompleto));
+        return alunosEmOrdemAlfabetica;
+    }
+
+    public int getNumAlunos() {
         return this.alunos.size();
     }
 
