@@ -9,12 +9,8 @@ public class Escola {
 
     public static void main(String[] args) {
         popularTurmas();
-
-        String relatorioAlunos = listarAlunosMatriculados();
-        System.out.printf(relatorioAlunos);
-
-        String relatorioTurmas = listarTurmas();
-        System.out.printf(relatorioTurmas);
+        Relatorio.gerarRelatorio("alunos.txt", listarAlunosMatriculados());
+        Relatorio.gerarRelatorio("turmas.txt", listarTurmas());
     }
 
     public static void criarTurmas() {

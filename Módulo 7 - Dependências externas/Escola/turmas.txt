@@ -1,0 +1,28 @@
+Há 2 turmas criadas:
+
+1. Turma Banco de Dados (11 alunos)
+	└ Alexandre Martins
+	└ Ana Ramos
+	└ Esther Rodrigues
+	└ Lavínia Cunha
+	└ Letícia Cunha
+	└ Natália Gomes
+	└ Pietra Martins
+	└ Thales Farias
+	└ Thomas Peixoto
+	└ Vitor Lima
+	└ Yago Ramos
+2. Turma Java (12 alunos)
+	└ Alana Porto
+	└ Ana Ramos
+	└ Esther Rodrigues
+	└ Lavínia Cunha
+	└ Lavínia Lopes
+	└ Letícia Cunha
+	└ Luiz Azevedo
+	└ Nathan Nascimento
+	└ Natália Gomes
+	└ Thales Farias
+	└ Vitor Lima
+	└ Yago Ramos
+

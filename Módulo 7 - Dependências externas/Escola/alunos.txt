@@ -1,0 +1,41 @@
+Há 15 alunos matriculados:
+
+1. Alana Porto
+	└ Turma Java
+2. Alexandre Martins
+	└ Turma Banco de Dados
+3. Ana Ramos
+	└ Turma Banco de Dados
+	└ Turma Java
+4. Esther Rodrigues
+	└ Turma Banco de Dados
+	└ Turma Java
+5. Lavínia Cunha
+	└ Turma Banco de Dados
+	└ Turma Java
+6. Lavínia Lopes
+	└ Turma Java
+7. Letícia Cunha
+	└ Turma Banco de Dados
+	└ Turma Java
+8. Luiz Azevedo
+	└ Turma Java
+9. Nathan Nascimento
+	└ Turma Java
+10. Natália Gomes
+	└ Turma Banco de Dados
+	└ Turma Java
+11. Pietra Martins
+	└ Turma Banco de Dados
+12. Thales Farias
+	└ Turma Banco de Dados
+	└ Turma Java
+13. Thomas Peixoto
+	└ Turma Banco de Dados
+14. Vitor Lima
+	└ Turma Banco de Dados
+	└ Turma Java
+15. Yago Ramos
+	└ Turma Banco de Dados
+	└ Turma Java
+
