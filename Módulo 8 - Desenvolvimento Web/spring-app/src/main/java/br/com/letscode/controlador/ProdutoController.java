@@ -25,10 +25,12 @@ public class ProdutoController {
 
         //// Método ruim!
         // Object nome = request.getAttribute("nome");
-        // equest.getAttribute("descricao");
+        // request.getAttribute("descricao");
 
         System.out.println("ATRIBUTO RECEBIDO: " + produtoDTO);
 
+        // Criar repositório e converter DTO para entidade
+        // (DTO = recebe os dados, Entity = é o que é persistido no banco de dados)
         ProdutoRepositorio repositorio = new ProdutoRepositorio();
         ProdutoEntity entity = new ProdutoEntity(produtoDTO);
 
@@ -40,10 +42,10 @@ public class ProdutoController {
 
         // Repassar produtos obtidos para a página de listagem
         redirectAttributes.addFlashAttribute("produtos", repositorio.obterTodos());
-
         // addAttribute =  a View consome quantas vezes quiser
         // FlashAttributes = a View consome os atributos na hora e apaga eles
 
+        // Redirecionar browser para a página de listagem
         RedirectView redirectView = new RedirectView("/produtos/listar", true);
 
         return "listarProdutos";
