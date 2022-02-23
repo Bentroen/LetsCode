@@ -20,8 +20,14 @@ public class ProdutoController {
         return "produto-form";
     }
 
+    @GetMapping("/listar")
+    public String listar() {
+        return "listar-produtos";
+    }
+
+
     @PostMapping("/cadastrar-produto")
-    public String cadastrarProduto(ProdutoDTO produtoDTO, Model model, RedirectAttributes redirectAttributes) {
+    public RedirectView cadastrarProduto(ProdutoDTO produtoDTO, Model model, RedirectAttributes redirectAttributes) {
 
         //// Método ruim!
         // Object nome = request.getAttribute("nome");
@@ -48,7 +54,7 @@ public class ProdutoController {
         // Redirecionar browser para a página de listagem
         RedirectView redirectView = new RedirectView("/produtos/listar", true);
 
-        return "listarProdutos";
+        return redirectView;
     }
 
 }
