@@ -30,10 +30,18 @@ public class ValidarClasses {
                 System.out.println(annotation);
             }
         }
-        
+
         for (Field atributos: produtoClass.getDeclaredFields()) {
             System.out.println(atributos.getName());
         }
+
+        //
+
+        Produto produto2 = Produto.builder()
+                .nome("Camiseta")
+                .qtd(1)
+                .valor("29,90")
+                .build();
 
     }
 
