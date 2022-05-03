@@ -2,16 +2,29 @@ package br.com.letscode;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class Rascunho {
 
     private static final ExecutorService executorService = Executors.newFixedThreadPool(3);
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) {
+        System.out.println();
+
+        try {
+            GerarNumeroAleatorio();
+        } catch (CancellationException e) {
+            System.out.println(e);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        } catch (ExecutionException e) {
+            System.out.println(e);
+        } finally {
+            executorService.shutdown();
+        }
+    }
+
+    public static void GerarNumeroAleatorio() throws ExecutionException, InterruptedException {
         System.out.println(ZonedDateTime.now() + ": Iniciando processamento");
         GerarNumero gerarNumero = new GerarNumero();
         ZonedDateTime time = ZonedDateTime.now();
@@ -33,8 +46,6 @@ public class Rascunho {
         if (!future.isCancelled()) {
             System.out.println("Gerado número " + future.get());
         }
-
-        executorService.shutdown();
 
     }
 
