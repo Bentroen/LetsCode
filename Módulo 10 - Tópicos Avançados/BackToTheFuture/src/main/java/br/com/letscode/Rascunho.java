@@ -10,7 +10,7 @@ public class Rascunho {
     private static final ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     public static void main(String[] args) {
-        System.out.println();
+        System.out.println(ZonedDateTime.now() + ": Iniciando processamento");
 
         try {
             calculaFatorial(100);
@@ -23,6 +23,9 @@ public class Rascunho {
         } finally {
             executorService.shutdown();
         }
+
+        System.out.println(ZonedDateTime.now() + ": Processamento concluído");
+    }
 
     private static void calculaFatorial(int numero) throws ExecutionException, InterruptedException {
         System.out.println("Calculando fatorial do número " + numero);
