@@ -1,5 +1,6 @@
 package br.com.letscode;
 
+import java.math.BigInteger;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.concurrent.*;
@@ -12,7 +13,7 @@ public class Rascunho {
         System.out.println();
 
         try {
-            GerarNumeroAleatorio();
+            calculaFatorial(100);
         } catch (CancellationException e) {
             System.out.println(e);
         } catch (InterruptedException e) {
@@ -22,6 +23,20 @@ public class Rascunho {
         } finally {
             executorService.shutdown();
         }
+
+    private static void calculaFatorial(int numero) throws ExecutionException, InterruptedException {
+        System.out.println("Calculando fatorial do número " + numero);
+
+        Fatorial fatorial = new Fatorial(numero);
+
+        Future<BigInteger> future = executorService.submit(fatorial);
+
+        while (!future.isDone()) {
+            System.out.println("Calculando fatorial");
+            Thread.sleep(1);
+        }
+
+        System.out.println("O fatorial de " + numero + " é: " + future.get());
     }
 
     public static void GerarNumeroAleatorio() throws ExecutionException, InterruptedException {
