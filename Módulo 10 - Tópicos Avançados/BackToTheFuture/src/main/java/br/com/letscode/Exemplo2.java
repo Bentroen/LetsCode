@@ -9,11 +9,15 @@ public class Exemplo2 {
                 .nome("Bernardo")
                 .sobrenome("Costa")
                 .build();
-        Observable.just(request)
+
+        converteAluno(request).subscribe();
+    }
+
+    public static Observable converteAluno(AlunoRequest request) {
+        return Observable.just(request)
                 .doOnNext(System.out::println)
                 .map(valor -> responseToEntity(valor))
-                .subscribe(valor -> System.out.println(valor));
-
+                .doOnNext(System.out::println);
     }
 
     public static AlunoEntity responseToEntity(AlunoRequest aluno) {
