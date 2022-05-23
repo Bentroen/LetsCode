@@ -2,6 +2,7 @@ package handler;
 
 import br.com.letscode.classesapi.domain.Presenca;
 import br.com.letscode.classesapi.gateway.AlunosGateway;
+import br.com.letscode.classesapi.gateway.TurmasGateway;
 import br.com.letscode.classesapi.repository.PresencaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -16,10 +17,13 @@ public class PresencaHandler {
 
     private final PresencaRepository presencaRepository;
     private final AlunosGateway alunosGateway;
+    private final TurmasGateway turmasGateway;
 
-    public PresencaHandler(PresencaRepository presencaRepository, AlunosGateway alunosGateway) {
+
+    public PresencaHandler(PresencaRepository presencaRepository, AlunosGateway alunosGateway, TurmasGateway turmasGateway) {
         this.presencaRepository = presencaRepository;
         this.alunosGateway = alunosGateway;
+        this.turmasGateway = turmasGateway;
     }
 
     public Mono<ServerResponse> adicionaPresenca(ServerRequest request) {
@@ -30,12 +34,15 @@ public class PresencaHandler {
                         .filter(Objects::nonNull)
                         .map(aluno -> presenca)
                 )
+                .flatMap(presenca -> turmasGateway.getTurma(presenca.getTurmaId())
+                        .filter(Objects::nonNull)
+                        .map(turma -> presenca)
+                )
                 .flatMap(presencaRepository::save) // Passing by reference - same as [ presenca -> presencaRepository.save(presenca) ]
                 .flatMap(presenca -> ServerResponse
                         .created(URI.create(String.format("presenca/%s", presenca.getId())))
                         .bodyValue(presenca))
-                .switchIfEmpty(ServerResponse.unprocessableEntity().bodyValue("Aluno inválido!")); // If filtered...
-//              .onErrorReturn(ServerResponse.unprocessableEntity().build().block()); // Ocorreu um erro ao processar o aluno
+                .switchIfEmpty(ServerResponse.unprocessableEntity().bodyValue("Aluno ou turma inválidos! Por favor, verifique as informações"));
     }
 
     public Mono<ServerResponse> getPresencasByAluno(ServerRequest request) {
