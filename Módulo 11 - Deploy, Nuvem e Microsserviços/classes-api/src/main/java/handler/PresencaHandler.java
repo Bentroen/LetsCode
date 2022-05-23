@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+import service.PresencaService;
 
 import java.net.URI;
 import java.util.Objects;
@@ -16,28 +17,18 @@ import java.util.Objects;
 public class PresencaHandler {
 
     private final PresencaRepository presencaRepository;
-    private final AlunosGateway alunosGateway;
-    private final TurmasGateway turmasGateway;
+    private final PresencaService presencaService;
 
-
-    public PresencaHandler(PresencaRepository presencaRepository, AlunosGateway alunosGateway, TurmasGateway turmasGateway) {
+    public PresencaHandler(PresencaRepository presencaRepository, PresencaService presencaService) {
         this.presencaRepository = presencaRepository;
-        this.alunosGateway = alunosGateway;
-        this.turmasGateway = turmasGateway;
+        this.presencaService = presencaService;
     }
 
     public Mono<ServerResponse> adicionaPresenca(ServerRequest request) {
 
         return request.bodyToMono(Presenca.class)
                 // Busco o aluno que veio no request, e valido se ele existe ou não
-                .flatMap(presenca -> alunosGateway.getAluno(presenca.getAlunoId())
-                        .filter(Objects::nonNull)
-                        .map(aluno -> presenca)
-                )
-                .flatMap(presenca -> turmasGateway.getTurma(presenca.getTurmaId())
-                        .filter(Objects::nonNull)
-                        .map(turma -> presenca)
-                )
+                .flatMap(presencaService::verificaPresenca)
                 .flatMap(presencaRepository::save) // Passing by reference - same as [ presenca -> presencaRepository.save(presenca) ]
                 .flatMap(presenca -> ServerResponse
                         .created(URI.create(String.format("presenca/%s", presenca.getId())))
